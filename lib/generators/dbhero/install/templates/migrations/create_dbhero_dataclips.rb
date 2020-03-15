@@ -1,6 +1,6 @@
-class CreateDbheroDataclips < ActiveRecord::Migration
+class CreateDbheroDataclips < ActiveRecord::Migration[5.2]
   def change
-    create_table :dbhero_dataclips do |t|
+    create_table :dbhero_dataclips, id: :uuid do |t|
       t.text :description, null: false
       t.text :raw_query, null: false
       t.text :token, null: false

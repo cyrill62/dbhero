@@ -7,7 +7,7 @@ module Dbhero
   class DataclipsController < ApplicationController
     before_action :check_auth, except: [:show]
     before_action :set_dataclip, only: [:show, :edit, :update, :destroy]
-    has_scope :search
+    has_scope :desc_search
     respond_to :html, :csv
 
     def index
@@ -39,7 +39,9 @@ module Dbhero
         end
 
         format.csv do
-          send_data @dataclip.csv_string, type: Mime[:csv], disposition: "attachment; filename=#{@dataclip.token}.csv"
+          send_data @dataclip.csv_string,
+                    type: Mime[:csv],
+                    disposition: "attachment; filename=#{@dataclip.token}.csv"
         end
       end
     end
@@ -70,7 +72,11 @@ module Dbhero
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_dataclip
-        @dataclip = Dataclip.find_by_token(params[:id])
+        @dataclip = Dataclip.find_by(id: params[:id])
+
+        unless @dataclip.token == params[:access_token]
+          check_auth
+        end
       end
 
       # Only allow a trusted parameter "white list" through.
