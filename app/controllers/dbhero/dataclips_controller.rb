@@ -74,7 +74,7 @@ module Dbhero
       def set_dataclip
         @dataclip = Dataclip.find_by(id: params[:id]) || Dataclip.find_by(slug: params[:id])
 
-        unless @dataclip.token == params[:access_token]
+        unless @dataclip.token == params[:'access-token']
           check_auth
         end
       end
