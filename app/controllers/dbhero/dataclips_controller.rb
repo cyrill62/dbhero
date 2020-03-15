@@ -72,7 +72,7 @@ module Dbhero
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_dataclip
-        @dataclip = Dataclip.find_by(id: params[:id])
+        @dataclip = Dataclip.find_by(id: params[:id]) || Dataclip.find_by(slug: params[:id])
 
         unless @dataclip.token == params[:access_token]
           check_auth

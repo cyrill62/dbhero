@@ -23,6 +23,10 @@ module Dbhero
       self.token = SecureRandom.uuid unless token
     end
 
+    def to_param
+      slug
+    end
+
     def title
       description.split("\n")[0]
     end

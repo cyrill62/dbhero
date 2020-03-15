@@ -4,6 +4,7 @@ class CreateDbheroDataclips < ActiveRecord::Migration[5.2]
       t.text :description, null: false
       t.text :raw_query, null: false
       t.text :token, null: false
+      t.text :slug, null: true
       t.text :user
       t.boolean :private, default: false, null: false
 
