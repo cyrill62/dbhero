@@ -4,7 +4,7 @@ require 'csv'
 
 module Dbhero
   class Dataclip < ActiveRecord::Base
-    before_create :set_token
+    before_create :set_token_and_slug
     after_save :refresh_cache
 
     scope :ordered, -> { order(updated_at: :desc) }
@@ -19,8 +19,9 @@ module Dbhero
       Rails.cache.delete(self)
     end
 
-    def set_token
+    def set_token_and_slug
       self.token = SecureRandom.uuid unless token
+      self.slug = SecureRandom.uuid unless slug
     end
 
     def to_param
