@@ -18,6 +18,7 @@ Style/ClassAndModuleChildren:
   # Its make rails boot impossible
   Exclude:
     - config/application.rb
+    - lib/dbhero/engine.rb
     - spec/dummy/config/application.rb
 Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: comma
