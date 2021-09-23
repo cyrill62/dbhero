@@ -1,7 +1,8 @@
-require "dbhero/engine"
-require "dbhero/configuration"
-require "dbhero/gdrive_exporter"
-require "slim"
+# frozen_string_literal: true
+
+require 'dbhero/engine'
+require 'dbhero/configuration'
+require 'slim'
 
 module Dbhero
   extend Configuration

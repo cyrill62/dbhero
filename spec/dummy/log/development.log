@@ -25,3 +25,41 @@ WHERE c.contype = 'f'
   AND t3.nspname = ANY (current_schemas(false))
 ORDER BY c.conname
 [0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "dummy_test"[0m
+  [1m[35m (1216.7ms)[0m  [1m[35mCREATE DATABASE "dummy_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (14.3ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "dbhero_dataclips" CASCADE[0m
+  [1m[35m (108.4ms)[0m  [1m[35mCREATE TABLE "dbhero_dataclips" ("id" bigserial primary key, "description" text NOT NULL, "raw_query" text NOT NULL, "token" text NOT NULL, "user" text, "private" boolean DEFAULT FALSE NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (51.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_dbhero_dataclips_on_token" ON "dbhero_dataclips" USING btree ("token")[0m
+  [1m[35m (47.0ms)[0m  [1m[35mCREATE  INDEX  "index_dbhero_dataclips_on_user" ON "dbhero_dataclips" USING btree ("user")[0m
+  [1m[35m (81.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (19.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20150323172444)[0m
+  [1m[35m (120.6ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-09-23 08:06:24.120047"], ["updated_at", "2021-09-23 08:06:24.120047"]]
+  [1m[35m (16.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.5ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2021-09-23 08:06:24.143819"], ["key", "environment"]]
+  [1m[35m (10.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (227.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "dummy_test"[0m
+  [1m[35m (980.0ms)[0m  [1m[35mCREATE DATABASE "dummy_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "dbhero_dataclips" CASCADE[0m
+  [1m[35m (111.7ms)[0m  [1m[35mCREATE TABLE "dbhero_dataclips" ("id" bigserial primary key, "description" text NOT NULL, "raw_query" text NOT NULL, "token" text NOT NULL, "slug" text, "user" text, "private" boolean DEFAULT FALSE NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (57.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_dbhero_dataclips_on_token" ON "dbhero_dataclips" USING btree ("token")[0m
+  [1m[35m (59.1ms)[0m  [1m[35mCREATE  INDEX  "index_dbhero_dataclips_on_user" ON "dbhero_dataclips" USING btree ("user")[0m
+  [1m[35m (812.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (13.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20150323172444)[0m
+  [1m[35m (103.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-09-23 08:10:29.262969"], ["updated_at", "2021-09-23 08:10:29.262969"]]
+  [1m[35m (12.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Update (0.4ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2021-09-23 08:10:29.281618"], ["key", "environment"]]
+  [1m[35m (10.6ms)[0m  [1m[35mCOMMIT[0m

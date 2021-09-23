@@ -1,9 +1,9 @@
-module Dbhero
-  class Engine < ::Rails::Engine
-    isolate_namespace Dbhero
+# frozen_string_literal: true
 
-    config.generators do |g|
-      g.template_engine :slim
-    end
+class Dbhero::Engine < ::Rails::Engine
+  isolate_namespace Dbhero
+
+  config.generators do |g|
+    g.template_engine :slim
   end
 end

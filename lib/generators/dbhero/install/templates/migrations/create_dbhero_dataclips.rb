@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateDbheroDataclips < ActiveRecord::Migration[5.2]
   def change
     create_table :dbhero_dataclips, id: :uuid do |t|
@@ -15,4 +17,3 @@ class CreateDbheroDataclips < ActiveRecord::Migration[5.2]
     add_index :dbhero_dataclips, :user
   end
 end
-

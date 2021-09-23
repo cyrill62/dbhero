@@ -19,8 +19,6 @@
         ul id='export-drop' class='dropdown-content'
           li
             = link_to 'csv', dataclip_path(@dataclip, format: 'csv', 'access-token': @dataclip.token)
-          li
-            = link_to 'google drive', dataclip_path(@dataclip, export_gdrive: true)
 
       .col.s12 style="overflow: auto;"
         table#clip_table.cell-border.striped data-page-length='300'
