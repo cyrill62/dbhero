@@ -69,7 +69,7 @@ class Dbhero::Dataclip < ApplicationRecord
 
   def csv_string
     query_result
-    CSV.generate(csv_options) do |csv|
+    CSV.generate(nil, **csv_options) do |csv|
       csv << @q_result.columns
       @q_result.rows.each { |row| csv << row }
     end
