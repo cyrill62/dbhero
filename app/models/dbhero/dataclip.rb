@@ -47,16 +47,29 @@ class Dbhero::Dataclip < ApplicationRecord
     (::Dbhero.cached_query_exp || 10.minutes)
   end
 
-  def query_result
-    Dbhero::DataclipRead.transaction do
+  def query_result(params = {})
+    cached_key = "#{cache_key}/" \
+                 "#{params.to_a.flatten.join('-').parameterize}"
+
+    query = raw_query
+
+    params.each do |name, value|
+      query.gsub!(
+        /-?-?(.*)#{name.upcase}/,
+        "\\1#{::Dbhero::DataclipRead.connection.quote(value)}",
+      )
+    end
+
+    ::Dbhero::DataclipRead.transaction do
       begin
-        @q_result ||= Rails.cache.fetch(self, expires_in: cache_ttl) do
-          Dbhero::DataclipRead.connection.select_all(raw_query)
+        @q_result ||= Rails.cache.fetch(cached_key, expires_in: cache_ttl) do
+          ::Dbhero::DataclipRead.connection.select_all(query)
         end
       rescue StandardError => e
         errors.add(:base, e.message)
+
+        raise ActiveRecord::Rollback
       end
-      raise ActiveRecord::Rollback
     end
   end
 
@@ -67,8 +80,8 @@ class Dbhero::Dataclip < ApplicationRecord
     }
   end
 
-  def csv_string
-    query_result
+  def csv_string(params)
+    query_result(params)
     CSV.generate(csv_options) do |csv|
       csv << @q_result.columns
       @q_result.rows.each { |row| csv << row }
