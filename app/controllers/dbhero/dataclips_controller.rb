@@ -26,9 +26,7 @@ class Dbhero::DataclipsController < Dbhero::ApplicationController
       format.csv do
         query_params = {}
 
-        if params.key?(:query)
-          query_params = params.require(:query).permit!
-        end
+        query_params = params.require(:query).permit! if params.key?(:query)
 
         send_data @dataclip.csv_string(query_params.to_h),
                   type: Mime[:csv],
