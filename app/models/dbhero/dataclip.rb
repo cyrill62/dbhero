@@ -59,8 +59,8 @@ class Dbhero::Dataclip < ApplicationRecord
 
     params.each do |name, value|
       query.gsub!(
-        /-?-?(.*)#{name.upcase}/,
-        "\\1#{::Dbhero::DataclipRead.connection.quote(value)}",
+        /--#{name.upcase}/,
+        ::Dbhero::DataclipRead.connection.quote(value),
       )
     end
 
