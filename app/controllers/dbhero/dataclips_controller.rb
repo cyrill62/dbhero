@@ -16,7 +16,13 @@ class Dbhero::DataclipsController < Dbhero::ApplicationController
 
   def show
     check_auth if @dataclip.private?
-    @dataclip.query_result
+    query_params = if params.key?(:query)
+                     params.require(:query).permit!.to_h
+                   else
+                     {}
+                   end
+
+    @dataclip.query_result(query_params)
 
     respond_to do |format|
       format.html do
@@ -24,11 +30,7 @@ class Dbhero::DataclipsController < Dbhero::ApplicationController
       end
 
       format.csv do
-        query_params = {}
-
-        query_params = params.require(:query).permit! if params.key?(:query)
-
-        send_data @dataclip.csv_string(query_params.to_h),
+        send_data @dataclip.csv_string(query_params),
                   type: Mime[:csv],
                   disposition: "attachment; filename=#{@dataclip.token}.csv"
       end
