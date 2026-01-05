@@ -1,0 +1,87 @@
+require:
+ - rubocop-rspec
+ - rubocop-rails
+AllCops:
+  NewCops: enable
+  Exclude:
+    - db/**/*.rb
+    - app/controllers/renter/users/registrations_controller.rb
+    - app/controllers/renter/subscription_controller.rb
+    - vendor/**/**
+    - node_modules/**/**
+    - bin/bundle
+    - backup/**/**
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+  # Its make rails boot impossible
+  Exclude:
+    - config/application.rb
+    - lib/dbhero/engine.rb
+    - spec/dummy/config/application.rb
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+Metrics/AbcSize:
+  Enabled: true
+  Max: 20
+Metrics/ClassLength:
+  Enabled: true
+  Max: 300
+Metrics/MethodLength:
+  CountComments: false
+  Max: 20
+Metrics/BlockLength:
+  Exclude:
+   - spec/**/*_spec.rb
+   - spec/factories/*.rb
+   - spec/rails_helper.rb
+   - app/**/concerns/**/*.rb
+   - config/initializers/**/*.rb
+   - config/environments/*.rb
+   - lib/tasks/**/*.rake
+Metrics/ModuleLength:
+  Enabled: true
+  Exclude:
+   - spec/**/*_spec.rb
+   - spec/**/*_helpers.rb
+  Max: 200
+RSpec/NestedGroups:
+  # Was 4 by default
+  # We choose to allow more nesting because we rely on `describe`s
+  # and often leave a blank `it` for better test  output
+  Max: 6
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+Layout/SpaceBeforeBrackets:
+  Enabled: false
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+Style/ExponentialNotation:
+  Enabled: true
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Style/Documentation:
+  Enabled: false
+Style/SlicingWithRange:
+  Enabled: true
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+Rails/LexicallyScopedActionFilter:
+  Enabled: false

@@ -18,9 +18,7 @@
 
         ul id='export-drop' class='dropdown-content'
           li
-            = link_to 'csv', dataclip_path(@dataclip, format: 'csv')
-          li
-            = link_to 'google drive', dataclip_path(@dataclip, export_gdrive: true)
+            = link_to 'csv', dataclip_path(@dataclip, format: 'csv', 'access-token': @dataclip.token)
 
       .col.s12 style="overflow: auto;"
         table#clip_table.cell-border.striped data-page-length='300'
@@ -39,4 +37,6 @@
       .col.s12.center-align
         h2.flow-text this clip is too large, please download the csv:
       .col.s12.center-align
-        = link_to "download csv", dataclip_url(@dataclip, format: :csv), class: "btn"
+        = link_to "download csv",
+                  dataclip_url(@dataclip, format: :csv, 'access-token': @dataclip.token),
+                  class: "btn"

@@ -1,9 +1,12 @@
-class CreateDbheroDataclips < ActiveRecord::Migration
+# frozen_string_literal: true
+
+class CreateDbheroDataclips < ActiveRecord::Migration[5.2]
   def change
-    create_table :dbhero_dataclips do |t|
+    create_table :dbhero_dataclips, id: :uuid do |t|
       t.text :description, null: false
       t.text :raw_query, null: false
       t.text :token, null: false
+      t.text :slug, null: true
       t.text :user
       t.boolean :private, default: false, null: false
 
@@ -14,4 +17,3 @@ class CreateDbheroDataclips < ActiveRecord::Migration
     add_index :dbhero_dataclips, :user
   end
 end
-
