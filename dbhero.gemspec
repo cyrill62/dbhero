@@ -23,7 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'has_scope'
   s.add_dependency 'rails', '> 5.0.0', '< 9.0.0'
   s.add_dependency 'responders'
-  s.add_dependency 'sass-rails'
   s.add_dependency 'slim-rails'
 
   s.add_development_dependency 'factory_bot_rails'
